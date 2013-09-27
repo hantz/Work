@@ -4,12 +4,12 @@ use InteractionIN\Contact as Contact;
 session_start(); 
 
 if(!$_POST) header("Location: contact.php");
-if(!isset($_POST['csrf_token']))	$_POST['csrf_token']="";
+if(!isset($_POST['token']))	$_POST['token']="";
 
-if ( $_POST['csrf_token'] == $_SESSION['csrf_token'] ) 
+if ( $_POST['token'] == $_SESSION['token'] ) 
 { 
-	$csrf_token_age = time() - $_SESSION['csrf_token_time']; 
-	if ( $csrf_token_age <= 180 ) 
+	$token_age = time() - $_SESSION['token_time']; 
+	if ( $token_age <= 120 ) 
 	{
 		$prepare = new Contact($_POST);
 		$result = $prepare->validateInput(); 
