@@ -3,9 +3,9 @@ session_start();
 session_regenerate_id(); 
 
 if ( !isset( $_SESSION['token'] ) ) { 
-	$csrf_token = sha1( uniqid( rand(), true ) ); 
-	$_SESSION['csrf_token'] = $csrf_token; 
-	$_SESSION['csrf_token_time'] = time(); 
+	$token = sha1( uniqid( rand(), true ) ); 
+	$_SESSION['token'] = $token; 
+	$_SESSION['token_time'] = time(); 
 }
 
 ?>
@@ -27,7 +27,7 @@ jQuery(document).ready(function(){
 			company: $('#company').val(),
 			subject: $('#subject').val(),
 			message: $('#message').val(),
-			csrf_token: $('#csrf_token').val()
+			token: $('#token').val()
 		},
 			function(data){
 				$('#contactform #submit').attr('disabled','');
@@ -111,7 +111,7 @@ Tell Free <a href="#">1-866-123-675</a></div>
               <textarea id="message" name="message" rows="6" cols="50"></textarea>
             </li>
             <li class="buttons">
-              <input id="csrf_token" type="hidden" name="csrf_token" value="<?php echo "$csrf_token"; ?>" />
+              <input id="token" type="hidden" name="token" value="<?php echo "$token"; ?>" />
               <input type="image" name="imageField" id="imageField" src="images/send.gif" />
             </li>
           </ol>
